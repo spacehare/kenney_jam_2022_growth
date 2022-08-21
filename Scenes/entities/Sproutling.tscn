@@ -1,0 +1,144 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://assets/2d/colored-transparent_packed.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Sproutling.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/entities/Goblin.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/audio/drop_004.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/audio/lose2.ogg" type="AudioStream" id=5]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 368, 144, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 144, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 304, 144, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 320, 144, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "dead",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 3 ) ],
+"loop": true,
+"name": "idle",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 48.0
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 8, 8 )
+
+[node name="Sproutling" type="KinematicBody2D"]
+collision_mask = 5
+input_pickable = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+goblin_scene = ExtResource( 3 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 6 )
+animation = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 8 )
+
+[node name="StatAge" type="Label" parent="." groups=["stat"]]
+margin_left = -8.0
+margin_top = -28.0
+margin_right = 24.0
+margin_bottom = -16.0
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_vertical = 1
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = -2
+custom_constants/shadow_offset_y = 0
+text = "AGE"
+align = 2
+
+[node name="StatSatiety" type="Label" parent="." groups=["stat"]]
+margin_left = -8.0
+margin_top = -20.0
+margin_right = 24.0
+margin_bottom = -8.0
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_vertical = 1
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = -2
+custom_constants/shadow_offset_y = 0
+text = "SAT"
+align = 2
+
+[node name="StatHappiness" type="Label" parent="." groups=["stat"]]
+margin_left = -8.0
+margin_top = -13.0
+margin_right = 24.0
+margin_bottom = -1.0
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_vertical = 1
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = -2
+custom_constants/shadow_offset_y = 0
+text = "HAP"
+align = 2
+
+[node name="SatietyTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="AgeTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="sfxHelloWorld" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
+
+[node name="sfxDeath" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -16.0
+pitch_scale = 2.0
+
+[node name="Area2D" type="Area2D" parent="."]
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 7 )
+
+[node name="Target" type="Position2D" parent="."]
+
+[node name="AreaClickable" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaClickable"]
+shape = SubResource( 9 )
+
+[connection signal="timeout" from="SatietyTimer" to="." method="_on_SatietyTimer_timeout"]
+[connection signal="timeout" from="AgeTimer" to="." method="_on_AgeTimer_timeout"]
+[connection signal="area_entered" from="AreaClickable" to="." method="_on_AreaClickable_area_entered"]
+[connection signal="area_exited" from="AreaClickable" to="." method="_on_AreaClickable_area_exited"]

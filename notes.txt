@@ -1,0 +1,24 @@
+- - -
+
+https://itch.io/jam/kenney-jam-2022
+https://www.reddit.com/r/godot/comments/fah25e/best_way_to_achieve_pixel_perfect_rendering/
+
+
+
+
+
+
+
+
+
+
+	print(self.name + " " + str(self.get_instance_id()) + " " + Mission.keys()[mission])
+
+1 2 3
+0 1 2 
+
+
+alex:
+2 random directions
+
+watering plants with mouse and stuff

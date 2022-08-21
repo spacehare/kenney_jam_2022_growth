@@ -1,0 +1,130 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://resources/tileset_borders.tres" type="TileSet" id=1]
+[ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
+[ext_resource path="res://resources/atlas_1bit/sproutling.atlastex" type="Texture" id=3]
+[ext_resource path="res://Scenes/entities/Sprout.tscn" type="PackedScene" id=4]
+[ext_resource path="res://resources/atlas_1bit/carrot.atlastex" type="Texture" id=5]
+[ext_resource path="res://assets/audio/spaceTrash2.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Scenes/entities/Food.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=8]
+[ext_resource path="res://resources/atlas_white/lmb_white.atlastex" type="Texture" id=9]
+[ext_resource path="res://resources/atlas_white/rmb_white.atlastex" type="Texture" id=10]
+[ext_resource path="res://resources/atlas_white/mmb_white.atlastex" type="Texture" id=11]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+sprout_scene = ExtResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 368.0
+margin_bottom = 368.0
+color = Color( 0.121569, 0.121569, 0.121569, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Hints" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 368.0
+margin_bottom = 368.0
+custom_constants/separation = 0
+alignment = 1
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="HintLMB" type="TextureRect" parent="Hints"]
+modulate = Color( 0.227451, 0.227451, 0.227451, 1 )
+margin_left = 160.0
+margin_top = 176.0
+margin_right = 176.0
+margin_bottom = 192.0
+size_flags_vertical = 4
+texture = ExtResource( 10 )
+
+[node name="HintMMB" type="TextureRect" parent="Hints"]
+modulate = Color( 0.227451, 0.227451, 0.227451, 1 )
+margin_left = 176.0
+margin_top = 176.0
+margin_right = 192.0
+margin_bottom = 192.0
+size_flags_vertical = 4
+texture = ExtResource( 11 )
+
+[node name="HintRMB" type="TextureRect" parent="Hints"]
+modulate = Color( 0.227451, 0.227451, 0.227451, 1 )
+margin_left = 192.0
+margin_top = 176.0
+margin_right = 208.0
+margin_bottom = 192.0
+size_flags_vertical = 4
+texture = ExtResource( 9 )
+
+[node name="tilemap_immutable" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 18, 1, 0, 19, 2, 0, 19, 3, 0, 19, 4, 0, 19, 5, 0, 19, 6, 0, 19, 7, 0, 19, 8, 0, 19, 9, 0, 19, 10, 0, 19, 11, 0, 19, 12, 0, 19, 13, 0, 19, 14, 0, 19, 15, 0, 19, 16, 0, 19, 17, 0, 19, 18, 0, 19, 19, 0, 19, 20, 0, 19, 21, 0, 19, 22, 0, 20, 65536, 0, 65554, 65538, 0, 0, 65543, 0, 1, 65544, 0, 1, 65552, 0, 131077, 65554, 0, 1, 65557, 0, 65555, 65558, 0, 65556, 131072, 0, 65554, 131074, 0, 65555, 131091, 0, 65555, 131094, 0, 65556, 196608, 0, 65554, 196630, 0, 65556, 262144, 0, 65554, 262147, 0, 1, 262164, 0, 1, 262166, 0, 65556, 327680, 0, 65554, 327700, 0, 1, 327702, 0, 65556, 393216, 0, 65554, 393219, 0, 65555, 393238, 0, 65556, 458752, 0, 65554, 458774, 0, 65556, 524288, 0, 65554, 524310, 0, 65556, 589824, 0, 65554, 589846, 0, 65556, 655360, 0, 65554, 655382, 0, 65556, 720896, 0, 65554, 720918, 0, 65556, 786432, 0, 65554, 786454, 0, 65556, 851968, 0, 65554, 851990, 0, 65556, 917504, 0, 65554, 917526, 0, 65556, 983040, 0, 65554, 983062, 0, 65556, 1048576, 0, 65554, 1048597, 0, 1, 1048598, 0, 65556, 1114112, 0, 65554, 1114134, 0, 65556, 1179648, 0, 65554, 1179649, 0, 1, 1179670, 0, 65556, 1245184, 0, 65554, 1245204, 0, 65555, 1245206, 0, 65556, 1310720, 0, 65554, 1310723, 0, 65555, 1310737, 0, 1, 1310742, 0, 65556, 1376256, 0, 65554, 1376257, 0, 65555, 1376262, 0, 1, 1376263, 0, 1, 1376275, 0, 65555, 1376278, 0, 65556, 1441792, 0, 131090, 1441793, 0, 131091, 1441794, 0, 131091, 1441795, 0, 131091, 1441796, 0, 131091, 1441797, 0, 131091, 1441798, 0, 131091, 1441799, 0, 131091, 1441800, 0, 131091, 1441801, 0, 131091, 1441802, 0, 131091, 1441803, 0, 131091, 1441804, 0, 131091, 1441805, 0, 131091, 1441806, 0, 131091, 1441807, 0, 131091, 1441808, 0, 131091, 1441809, 0, 131091, 1441810, 0, 131091, 1441811, 0, 131091, 1441812, 0, 131091, 1441813, 0, 131091, 1441814, 0, 131092 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="sfxMookDeath" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="HUD" parent="." instance=ExtResource( 8 )]
+margin_right = 368.0
+margin_bottom = 368.0
+
+[node name="debugvector" type="Position2D" parent="."]
+position = Vector2( 184, 184 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 352, 352 )
+
+[node name="Food" parent="." instance=ExtResource( 7 )]
+position = Vector2( 184, 248 )
+
+[node name="Food2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 248, 248 )
+
+[node name="Food3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 120, 248 )
+
+[node name="Sprout" parent="." instance=ExtResource( 4 )]
+position = Vector2( 184, 120 )
+
+[node name="Sprout2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 120, 120 )
+
+[node name="Sprout3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 248, 120 )
+
+[node name="hintor" type="Label" parent="."]
+visible = false
+margin_left = 168.0
+margin_top = 152.0
+margin_right = 232.0
+margin_bottom = 216.0
+rect_scale = Vector2( 0.5, 0.5 )
+text = "OR"
+align = 1
+valign = 1
+
+[node name="hintgoblin" type="Sprite" parent="."]
+visible = false
+position = Vector2( 152, 184 )
+texture = ExtResource( 3 )
+
+[node name="hintcarrot" type="Sprite" parent="."]
+visible = false
+position = Vector2( 216, 184 )
+texture = ExtResource( 5 )

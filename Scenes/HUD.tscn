@@ -1,0 +1,162 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/ui/Kenney Mini Square Mono.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scripts/HUD.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.196078, 0.25098, 0.501961, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.886275, 0.847059, 0.584314, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.145098, 0.329412, 0.207843, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.886275, 0.847059, 0.584314, 1 )
+anti_aliasing = false
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0.196078, 0.760784, 0.890196, 0.784314, 0.188235, 0.498039, 0.568627, 0.501961 )
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 0.327028, 0.202698, 0.632813, 1, 0.226733, 0.890625, 0.170471, 0 )
+
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 0.905273, 0.900466, 0.820404, 1, 1, 1, 1, 0 )
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 4.0
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -92.0
+margin_top = -12.0
+margin_right = 76.0
+color = Color( 0.121569, 0.121569, 0.121569, 1 )
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -88.0
+margin_top = 356.0
+margin_right = 72.0
+margin_bottom = 364.0
+custom_styles/fg = SubResource( 9 )
+custom_styles/bg = SubResource( 8 )
+max_value = 1000.0
+value = 300.0
+percent_visible = false
+
+[node name="LabelMissions" type="Label" parent="." groups=["stat"]]
+margin_left = 21.0
+margin_top = 20.0
+margin_right = 61.0
+margin_bottom = 32.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0.87451, 0.87451, 0.87451, 0.235294 )
+custom_fonts/font = SubResource( 1 )
+text = "XXXXXXXXXXXXXXXXXXXXX"
+
+[node name="Rain" type="CPUParticles2D" parent="."]
+position = Vector2( 93, 56 )
+emitting = false
+amount = 32
+lifetime = 0.5
+randomness = 1.0
+lifetime_randomness = 0.1
+emission_shape = 1
+emission_sphere_radius = 8.0
+scale_amount_random = 0.5
+color = Color( 0.196078, 0.760784, 0.890196, 1 )
+color_ramp = SubResource( 2 )
+
+[node name="MouseRelease" type="CPUParticles2D" parent="."]
+position = Vector2( 70, 56 )
+emitting = false
+amount = 4
+one_shot = true
+spread = 0.0
+color_ramp = SubResource( 3 )
+
+[node name="Magic" type="CPUParticles2D" parent="."]
+position = Vector2( 48, 56 )
+emitting = false
+amount = 64
+lifetime = 2.0
+emission_shape = 2
+emission_rect_extents = Vector2( 5, 5 )
+spread = 0.0
+gravity = Vector2( 0, 32 )
+color_ramp = SubResource( 3 )
+
+[node name="Tornado" type="CPUParticles2D" parent="."]
+visible = false
+position = Vector2( 132, 64 )
+amount = 48
+lifetime = 6.0
+emission_shape = 1
+emission_sphere_radius = 5.0
+spread = 0.0
+gravity = Vector2( 32, 0 )
+orbit_velocity = 1.0
+orbit_velocity_random = 0.17
+color_ramp = SubResource( 5 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 6 )
+
+[node name="AboveCursor" type="Position2D" parent="."]
+
+[node name="HintMana" type="Label" parent="."]
+margin_left = 96.0
+margin_top = 349.0
+margin_right = 160.0
+margin_bottom = 361.0
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 8
+size_flags_vertical = 0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = -2
+custom_constants/shadow_offset_y = 0
+text = "MANA"
+
+[node name="StatMana" type="Label" parent="." groups=["stat"]]
+margin_left = 212.0
+margin_top = 349.0
+margin_right = 276.0
+margin_bottom = 361.0
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 8
+size_flags_vertical = 0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = -2
+custom_constants/shadow_offset_y = 0
+text = "MANA"
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]
