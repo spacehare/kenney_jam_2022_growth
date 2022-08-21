@@ -132,7 +132,7 @@ func _physics_process(delta):
 				group = "sprout"
 			elif not get_tree().get_nodes_in_group("ling").empty():
 				group = "ling"
-			elif not get_tree().get_nodes_in_group("goblin").empty():
+			elif not get_tree().get_nodes_in_group("gobbo").empty():
 				group = "gobbo"
 			else:
 				food_available = false
